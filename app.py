@@ -40,14 +40,14 @@ def updatetasklist(tasklist):
 #### Our main page
 @app.route('/')
 def home():
-    return render_template('home.html',datetoday2=datetoday2,tasklist=gettasklist(),l=len(gettasklist())) 
+    return render_template('index.html',datetoday2=datetoday2,tasklist=gettasklist(),l=len(gettasklist())) 
 
 
 # Function to clear the to-do list
 @app.route('/clear')
 def clear_list():
     createnewtasklist()
-    return render_template('home.html',datetoday2=datetoday2,tasklist=gettasklist(),l=len(gettasklist())) 
+    return render_template('index.html',datetoday2=datetoday2,tasklist=gettasklist(),l=len(gettasklist())) 
 
 
 # Function to add a task to the to-do list
@@ -56,7 +56,7 @@ def add_task():
     task = request.form.get('newtask')
     with open('tasks.txt','a') as f:
         f.writelines(task+'\n')
-    return render_template('home.html',datetoday2=datetoday2,tasklist=gettasklist(),l=len(gettasklist())) 
+    return render_template('index.html',datetoday2=datetoday2,tasklist=gettasklist(),l=len(gettasklist())) 
 
 
 # Function to remove a task from the to-do list
@@ -67,11 +67,11 @@ def remove_task():
     print(task_index)
     print(tasklist)
     if task_index < 0 or task_index > len(tasklist):
-        return render_template('home.html',datetoday2=datetoday2,tasklist=tasklist,l=len(tasklist),mess='Invalid Index...') 
+        return render_template('index.html',datetoday2=datetoday2,tasklist=tasklist,l=len(tasklist),mess='Invalid Index...') 
     else:
         removed_task = tasklist.pop(task_index)
     updatetasklist(tasklist)
-    return render_template('home.html',datetoday2=datetoday2,tasklist=tasklist,l=len(tasklist)) 
+    return render_template('index.html',datetoday2=datetoday2,tasklist=tasklist,l=len(tasklist)) 
     
 
 
